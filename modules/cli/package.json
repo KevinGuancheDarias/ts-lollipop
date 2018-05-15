@@ -1,0 +1,35 @@
+{
+  "name": "@ts-lollipop/cli",
+  "version": "0.1.0",
+  "description": "Lollipop framework core",
+  "preferGlobal": true,
+  "bin": {
+    "lollipop": "./bin/lollipop"
+  },
+  "scripts": {
+    "clear-bin": "del-cli bin",
+    "prepack": "npm run clear-bin && tsc && cp src/lollipop bin/",
+    "lint": "tslint \"src/**/*.ts\"",
+    "dev": "nodemon -e ts  --exec \"npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Guanche Darias",
+  "license": "MIT",
+  "dependencies": {
+    "@types/mz": "0.0.32",
+    "@types/ncp": "^2.0.1",
+    "@types/recursive-readdir": "^2.2.0",
+    "commander": "^2.15.1",
+    "mz": "^2.7.0",
+    "ncp": "^2.0.0",
+    "recursive-readdir": "^2.2.2"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "nodemon": "^1.12.5",
+    "ts-node": "^6.0.0",
+    "tslib": "^1.8.1",
+    "tslint": "^4.5.0",
+    "typescript": "^2.7.0"
+  }
+}

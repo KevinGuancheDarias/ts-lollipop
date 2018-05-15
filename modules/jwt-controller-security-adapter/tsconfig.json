@@ -1,0 +1,9 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "outDir": "../../modules/jwt-controller-security-adapter/dist"
+    },
+    "include": [
+        "../../modules/jwt-controller-security-adapter/src"
+    ]
+}

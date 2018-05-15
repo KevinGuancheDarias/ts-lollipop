@@ -1,0 +1,1 @@
+export * from './jwt-controller-security-adapter.module';

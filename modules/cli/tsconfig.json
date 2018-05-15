@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "outDir": "../../modules/cli/bin"
+    },
+    "include": [
+        "../../modules/cli"
+    ],
+    "exclude": [
+        "**/skel"
+    ]
+}

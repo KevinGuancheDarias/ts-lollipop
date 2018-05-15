@@ -1,0 +1,9 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "outDir": "../../modules/typeorm-database-adapter/dist"
+    },
+    "include": [
+        "../../modules/typeorm-database-adapter/src"
+    ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@ts-lollipop/core",
+  "version": "0.1.0",
+  "description": "Lollipop framework core",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clear-dist": "del-cli dist",
+    "prepack": "npm run clear-dist && tsc",
+    "postpack": "del-cli index.js",
+    "lint": "tslint \"src/**/*.ts\"",
+    "dev": "nodemon -e ts  --exec \"npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Guanche Darias",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jsonwebtoken": "^7.2.7",
+    "@types/mz": "0.0.32",
+    "@types/recursive-readdir": "^2.2.0",
+    "@types/sequelize": "^4.27.12",
+    "commander": "^2.15.1",
+    "jsonwebtoken": "^8.2.1",
+    "mysql": "^2.15.0",
+    "mz": "^2.7.0",
+    "ng2-logger": "^2.0.35",
+    "recursive-readdir": "^2.2.2",
+    "reflect-metadata": "^0.1.12",
+    "ts-node": "^6.0.0",
+    "typeorm": "^0.2.5"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "nodemon": "^1.12.5",
+    "tslib": "^1.8.1",
+    "tslint": "^4.5.0",
+    "typescript": "^2.7.0"
+  }
+}

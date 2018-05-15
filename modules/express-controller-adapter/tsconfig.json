@@ -1,0 +1,9 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "outDir": "../../modules/express-controller-adapter/dist"
+    },
+    "include": [
+        "../../modules/express-controller-adapter/src"
+    ]
+}

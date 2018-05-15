@@ -1,0 +1,1 @@
+export * from './express-controller-adapter-module';

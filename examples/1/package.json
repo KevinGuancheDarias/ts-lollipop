@@ -1,0 +1,39 @@
+{
+  "name": "lollipop-test",
+  "version": "0.1.0",
+  "description": "Lollipop framework core",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "ts-node src/example/main.ts",
+    "tsc": "tsc",
+    "prepack": "tsc",
+    "lint": "tslint \"src/**/*.ts\"",
+    "dev": "nodemon -e ts  --exec \"npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Guanche Darias",
+  "license": "MIT",
+  "dependencies": {
+    "@ts-lollipop/core": "0.1.0",
+    "@ts-lollipop/express-controller-adapter": "0.1.0",
+    "@ts-lollipop/jwt-controller-security-adapter": "0.1.0",
+    "@ts-lollipop/typeorm-database-adapter": "0.1.0",
+    "@types/node": "^10.0.9",
+    "sqlite3": "^4.0.0",
+    "ts-node": "^6.0.3",
+    "typeorm": "^0.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5",
+    "tslib": "^1.8.1",
+    "tslint": "^4.5.0",
+    "typescript": "^2.8.3"
+  },
+  "localDependencies": {
+    "@ts-lollipop/core": "../../modules/core",
+    "@ts-lollipop/express-controller-adapter": "../../modules/express-controller-adapter",
+    "@ts-lollipop/jwt-controller-security-adapter": "../../modules/jwt-controller-security-adapter",
+    "@ts-lollipop/typeorm-database-adapter": "../../modules/typeorm-database-adapter"
+  }
+}
