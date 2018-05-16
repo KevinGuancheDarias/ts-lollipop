@@ -1,4 +1,4 @@
-import { AbstractControllerSecurityAdapter } from '../../controller-security/abstract-controller-security-adapter.module';
+import { AbstractControllerSecurityAdapterModule } from '../../controller-security/abstract-controller-security-adapter.module';
 import { RequestFilter } from './request-filter';
 
 /**
@@ -14,11 +14,11 @@ export interface ControllerAdapterConfiguration {
     /**
      * Security adapters to use
      *
-     * @type {AbstractControllerSecurityAdapter[]}
+     * @type {AbstractControllerSecurityAdapterModule[]}
      * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
-    securityAdapters?: AbstractControllerSecurityAdapter[];
+    securityAdapters?: AbstractControllerSecurityAdapterModule[];
 
     /**
      * Request filters that will run before the authentication

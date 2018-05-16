@@ -1,4 +1,4 @@
-import { AbstractControllerSecurityAdapter } from '../abstract-controller-security-adapter.module';
+import { AbstractControllerSecurityAdapterModule } from '../abstract-controller-security-adapter.module';
 import { RequestFilter, EMPTY_REQUEST_FILTER } from '../../controller/types/request-filter';
 import { ContextHolder } from '../../../context-holder';
 import { ModuleTypes } from '../../../enums/module-types.enum';
@@ -24,7 +24,7 @@ export class ControllerSecurityAdapterUtil {
      * @template T
      * @param {T} target Target instance that has the method (Usually an instance of a class decorated with @Controller)
      * @param {keyof T} targetMethod Target method to check for custom security
-     * @param {AbstractControllerSecurityAdapter} securityModule Module to use, if not defined, will use first one
+     * @param {AbstractControllerSecurityAdapterModule} securityModule Module to use, if not defined, will use first one
      * @returns {RequestFilter}
      * @throws {ModuleNotFoundLollipopError} When <i>securityModule</i> is specified, but the specified one is not registered
      * @since 0.1.0
@@ -33,9 +33,9 @@ export class ControllerSecurityAdapterUtil {
     public static handleSecurityForMethod<T>(
         target: T,
         targetMethod: keyof T,
-        securityModule?: AbstractControllerSecurityAdapter
+        securityModule?: AbstractControllerSecurityAdapterModule
     ): RequestFilter {
-        const targetModule: AbstractControllerSecurityAdapter = (
+        const targetModule: AbstractControllerSecurityAdapterModule = (
             ControllerSecurityAdapterUtil._findTargetSecurityModule(target, targetMethod, securityModule)
         );
         return targetModule
@@ -47,12 +47,12 @@ export class ControllerSecurityAdapterUtil {
     private static _findTargetSecurityModule<T>(
         target: T,
         targetMethod: keyof T,
-        specifiedSecurityModule: AbstractControllerSecurityAdapter
-    ): AbstractControllerSecurityAdapter {
-        const securityModules: AbstractControllerSecurityAdapter[] = ContextHolder
+        specifiedSecurityModule: AbstractControllerSecurityAdapterModule
+    ): AbstractControllerSecurityAdapterModule {
+        const securityModules: AbstractControllerSecurityAdapterModule[] = ContextHolder
             .getLollipop()
             .getRegisteredModuleByType<AbstractControllerAdapterModule>(ModuleTypes.CONTROLLER).getSecurityModules();
-        let targetModule: AbstractControllerSecurityAdapter;
+        let targetModule: AbstractControllerSecurityAdapterModule;
         if (specifiedSecurityModule) {
             targetModule = securityModules.find(current => current.constructor === specifiedSecurityModule.constructor);
             if (!targetModule) {

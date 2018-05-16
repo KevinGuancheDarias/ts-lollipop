@@ -10,7 +10,7 @@ import { MediaTypeEnum } from './enums/media-type.enum';
 import { RequestContext } from './types/request-context';
 import { findProducesValue } from './decorators/produces.decorator';
 import { ModuleTypes } from '../../enums/module-types.enum';
-import { AbstractControllerSecurityAdapter } from '../controller-security/abstract-controller-security-adapter.module';
+import { AbstractControllerSecurityAdapterModule } from '../controller-security/abstract-controller-security-adapter.module';
 import { RequestFilter, EMPTY_REQUEST_FILTER } from './types/request-filter';
 import { LollipopRequest } from './pojos/lollipop-request';
 import { LollipopResponse } from './types/lollipop-response';
@@ -125,11 +125,11 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
-     * @returns {AbstractControllerSecurityAdapter[]}
+     * @returns {AbstractControllerSecurityAdapterModule[]}
      * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
-    public getSecurityModules(): AbstractControllerSecurityAdapter[] {
+    public getSecurityModules(): AbstractControllerSecurityAdapterModule[] {
         return this._settings.securityAdapters;
     }
 

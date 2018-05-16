@@ -7,7 +7,7 @@ import { BadInputLollipopError } from '../../errors/bad-input-lollipop.error';
 import { AbstractControllerAdapterModule } from '../controller/abstract-controller-adapter.module';
 
 /**
- * Use to force type to be AbstractControllerSecurityAdapter
+ * Use to force type to be AbstractControllerSecurityAdapterModule
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
@@ -15,7 +15,7 @@ import { AbstractControllerAdapterModule } from '../controller/abstract-controll
  * @interface ControllerSecurityAdapterConstructor
  */
 export interface ControllerSecurityAdapterConstructor {
-    new(): AbstractControllerSecurityAdapter;
+    new(): AbstractControllerSecurityAdapterModule;
 }
 
 /**
@@ -25,9 +25,9 @@ export interface ControllerSecurityAdapterConstructor {
  * @export
  * @abstract
  * @since 0.1.0
- * @class AbstractControllerSecurityAdapter
+ * @class AbstractControllerSecurityAdapterModule
  */
-export abstract class AbstractControllerSecurityAdapter {
+export abstract class AbstractControllerSecurityAdapterModule {
 
     /**
      * Puts extra information in this header when an authentication error occurs
@@ -35,7 +35,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @protected
      * @static
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     protected static readonly _HTTP_DEBUG_HEADER = 'X-Lollipop-Authentication-Status';
 
@@ -45,7 +45,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @protected
      * @type {AbstractControllerAdapterModule}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     protected _targetController: AbstractControllerAdapterModule;
 
@@ -57,7 +57,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} request
      * @returns {boolean}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public abstract supports(requestContext: RequestContext): boolean;
 
@@ -69,7 +69,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestContext
      * @returns {Promise<any>}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public abstract createRequestSecurityObject(requestContext: RequestContext): Promise<any>;
 
@@ -82,7 +82,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestcontext
      * @returns {boolean} Returns true, if the credentials are valid
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public abstract isAuthenticated(requestContext: RequestContext): boolean;
 
@@ -102,7 +102,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {AbstractControllerAdapterModule} value
      * @returns {this}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public setControllerAdapter(value: AbstractControllerAdapterModule): this {
         this._targetController = value;
@@ -115,7 +115,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {AbstractControllerAdapterModule}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public getControllerAdapter(): AbstractControllerAdapterModule {
         return this._targetController;
@@ -130,7 +130,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {keyof T} method
      * @returns {RequestFilter}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public findMethodSecurityFilter<T>(target: T, method: keyof T): RequestFilter {
         const securityMetadata: ControllerSecurityDecoratorOptions = findSecurityDecoratorMetadata(target, method);
@@ -167,7 +167,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {ControllerSecurityDecoratorOptions} securityMetadata
      * @returns {Promise<boolean>} True If the authentication succed
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public async runModulesValidationActions(
         requestContext: RequestContext,
@@ -205,7 +205,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestContext
      * @returns {Promise<boolean>}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     public async runValidationAction(requestContext: RequestContext): Promise<boolean> {
         if (this._options.validationAction) {
@@ -224,7 +224,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestContext
      * @returns {Promise<void>}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     protected async _buildAuthenthicationMetadata(requestContext: RequestContext): Promise<void> {
         requestContext.request.setAuthenticationMetadata(await this.createRequestSecurityObject(requestContext));
@@ -239,7 +239,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {ControllerSecurityDecoratorOptions} securityMetadata
      * @returns {Promise<boolean>}
      * @since 0.1.0
-     * @memberof AbstractControllerSecurityAdapter
+     * @memberof AbstractControllerSecurityAdapterModule
      */
     private async _executeSecurityMethod(
         target: Object,
@@ -252,7 +252,7 @@ export abstract class AbstractControllerSecurityAdapter {
         if (!retVal) {
             requestContext.response.setHttpStatus(401);
             requestContext.response.setHeader(
-                AbstractControllerSecurityAdapter._HTTP_DEBUG_HEADER,
+                AbstractControllerSecurityAdapterModule._HTTP_DEBUG_HEADER,
                 'isAuthenticated() failed'
             );
         } else {
@@ -275,7 +275,7 @@ export abstract class AbstractControllerSecurityAdapter {
             if (!retVal) {
                 requestContext.response.setHttpStatus(401);
                 requestContext.response.setHeader(
-                    AbstractControllerSecurityAdapter._HTTP_DEBUG_HEADER,
+                    AbstractControllerSecurityAdapterModule._HTTP_DEBUG_HEADER,
                     'error in global or custom validators'
                 );
             }

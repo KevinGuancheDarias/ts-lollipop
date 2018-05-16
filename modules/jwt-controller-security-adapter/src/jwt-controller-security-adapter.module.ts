@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { AbstractControllerSecurityAdapter } from '@ts-lollipop/core/dist/adapters/controller-security';
+import { AbstractControllerSecurityAdapterModule } from '@ts-lollipop/core/dist/adapters/controller-security';
 import { RequestContext, LollipopRequest } from '@ts-lollipop/core/dist/adapters/controller';
 import * as jwt from 'jsonwebtoken';
 import { JwtControllerSecurityOptions } from './types/jwt-controller-security-options';
@@ -11,9 +11,9 @@ import { JwtControllerSecurityOptions } from './types/jwt-controller-security-op
  * @export
  * @class JwtControllerSecurityAdapterModule
  * @since 0.1.0
- * @extends {AbstractControllerSecurityAdapter}
+ * @extends {AbstractControllerSecurityAdapterModule}
  */
-export class JwtControllerSecurityAdapterModule extends AbstractControllerSecurityAdapter {
+export class JwtControllerSecurityAdapterModule extends AbstractControllerSecurityAdapterModule {
 
     private static readonly BEARER_TEXT_LENGTH = 7;
 
