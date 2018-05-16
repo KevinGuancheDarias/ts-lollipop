@@ -6,6 +6,7 @@ import { LollipopError } from './lollipop.error';
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class BadInputLollipopError
+ * @since 0.1.0
  * @extends {LollipopError}
  */
 export class BadInputLollipopError extends LollipopError {

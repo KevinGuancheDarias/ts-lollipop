@@ -5,6 +5,7 @@ import { SecurityValidationFunction } from './security-validation-function';
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @interface ControllerSecurityOptions
  */
 export interface ControllerSecurityOptions {
@@ -12,6 +13,7 @@ export interface ControllerSecurityOptions {
      * If true, will check all routes, and not only those having the @Security decorator, defaults to false
      *
      * @type {boolean}
+     * @since 0.1.0
      * @memberof ControllerSecurityOptions
      */
     checkAll?: boolean;
@@ -21,6 +23,7 @@ export interface ControllerSecurityOptions {
      * Defaults to true
      *
      * @type {boolean}
+     * @since 0.1.0
      * @memberof ControllerSecurityOptions
      */
     isRequired?: boolean;
@@ -29,6 +32,7 @@ export interface ControllerSecurityOptions {
      * Action to execute to validate all request
      *
      * @type {SecurityValidationFunction}
+     * @since 0.1.0
      * @memberof ControllerSecurityOptions
      */
     validationAction?: SecurityValidationFunction;
@@ -37,6 +41,7 @@ export interface ControllerSecurityOptions {
      * Path to login URL (Will not be secured) If not specified, there will not be excluded url
      *
      * @type {string}
+     * @since 0.1.0
      * @memberof ControllerSecurityOptions
      */
     loginUrl?: string;

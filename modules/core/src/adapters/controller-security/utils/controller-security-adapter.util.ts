@@ -10,6 +10,7 @@ import { AbstractControllerAdapterModule } from '../../controller/abstract-contr
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @class ControllerSecurityAdapterUtil
  */
 export class ControllerSecurityAdapterUtil {
@@ -26,6 +27,7 @@ export class ControllerSecurityAdapterUtil {
      * @param {AbstractControllerSecurityAdapter} securityModule Module to use, if not defined, will use first one
      * @returns {RequestFilter}
      * @throws {ModuleNotFoundLollipopError} When <i>securityModule</i> is specified, but the specified one is not registered
+     * @since 0.1.0
      * @memberof SecurityAdapterUtil
      */
     public static handleSecurityForMethod<T>(

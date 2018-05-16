@@ -3,6 +3,7 @@ import { ContextHolder } from '../../../context-holder';
 import { FrameworkHooksEnum } from '../../../hook/enums/framework-hooks.enum';
 import { ControllerAdapterUtil } from '../../controller/utils/controller-adapter.util';
 
+/** @since 0.1.0 */
 export const LOLLIPOP_CONNECTION_COMPONENT_IDENTIFIER = 'LollipopDatabaseConnection';
 
 /**
@@ -11,6 +12,7 @@ export const LOLLIPOP_CONNECTION_COMPONENT_IDENTIFIER = 'LollipopDatabaseConnect
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @returns {PropertyDecorator}
+ * @since 0.1.0
  */
 export function DatabaseConnection(): PropertyDecorator {
     const injectFunction: PropertyDecorator = Inject(LOLLIPOP_CONNECTION_COMPONENT_IDENTIFIER);

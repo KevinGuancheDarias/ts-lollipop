@@ -24,10 +24,19 @@ import { DiContainer } from '../../di/di-container';
  * @export
  * @abstract
  * @class AbstractControllerModule
+ * @since 0.1.0
  * @extends {AbstractLollipopModule}
  */
 export abstract class AbstractControllerAdapterModule extends AbstractLollipopModule {
 
+    /**
+     * Registered serializers
+     *
+     * @protected
+     * @type {{ [key: number]: SerializerFunction }}
+     * @since 0.1.0
+     * @memberof AbstractControllerAdapterModule
+     */
     protected _producerSerializers: { [key: number]: SerializerFunction } = {};
 
     /**
@@ -35,6 +44,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      * @protected
      * @type {any[]}
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected _controllers: any[] = [];
@@ -67,6 +77,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {string} path Target path
      * @param {Object} target Object that has the decorator
      * @param {string} method Method that has the decorator
+     * @since 0.1.0
      * @memberof AbstractControllerModule
      */
     public abstract handleGetDecorator(path: string, target: Object, method: string): void;
@@ -79,6 +90,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {string} path Target path
      * @param {Object} target Object that has the decorator
      * @param {string} method Method that has the decorator
+     * @since 0.1.0
      * @memberof AbstractControllerModule
      */
     public abstract handlePostDecorator(path: string, target: Object, method: string): void;
@@ -91,6 +103,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {string} path Target path
      * @param {Object} target Object that has the decorator
      * @param {string} method Method that has the decorator
+     * @since 0.1.0
      * @memberof AbstractControllerModule
      */
     public abstract handlePutDecorator(path: string, target: Object, method: string): void;
@@ -103,10 +116,19 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {string} path Target path
      * @param {Object} target Object that has the decorator
      * @param {string} method Method that has the decorator
+     * @since 0.1.0
      * @memberof AbstractControllerModule
      */
     public abstract handleDeleteDecorator(path: string, target: Object, method: string): void;
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {AbstractControllerSecurityAdapter[]}
+     * @since 0.1.0
+     * @memberof AbstractControllerAdapterModule
+     */
     public getSecurityModules(): AbstractControllerSecurityAdapter[] {
         return this._settings.securityAdapters;
     }
@@ -117,6 +139,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {Object} target Target controller instance to register
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     public registerController(target: Object) {
@@ -130,6 +153,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {Object} target Object that has the decorator
+     * @since 0.1.0
      * @memberof AbstractControllerModule
      */
     public handleControllerDecorator(target: Function): void {
@@ -142,6 +166,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {Promise<void>} Resolves when all the controllers have been "require()d"
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     public async registerModule(): Promise<void> {
@@ -158,6 +183,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {Promise<void>}
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     public async handleContextAvailable(): Promise<void> {
@@ -198,12 +224,23 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {MediaTypeEnum} mediaType
      * @param {SerializerFunction} serializer
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     public registerProducerSerializer(mediaType: MediaTypeEnum, serializer: SerializerFunction): void {
         this._producerSerializers[mediaType] = serializer;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {MediaTypeEnum} mediaTypeEnum
+     * @param {RequestContext} context
+     * @returns {Promise<any>}
+     * @since 0.1.0
+     * @memberof AbstractControllerAdapterModule
+     */
     public async invokeProducerSerializer(mediaTypeEnum: MediaTypeEnum, context: RequestContext): Promise<any> {
         await this._producerSerializers[mediaTypeEnum](context);
     }
@@ -216,6 +253,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {Object} target
      * @param {string} method
      * @returns {SerializerFunction}
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected _findSerializer(target: Object, method: string): SerializerFunction {
@@ -229,6 +267,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @protected
      * @returns {DiContainer} DI container, or null if not found
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected _findDiContainer(): DiContainer {
@@ -253,6 +292,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {*} target
      * @param {string} method
      * @returns {RequestFilter[]}
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected _findSecurityFilters(target: any, method: string): RequestFilter[] {
@@ -270,6 +310,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {LollipopResponse} response
      * @param {RequestFilter} securityFilters
      * @returns {Promise<boolean>} True, if should call the controller method
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected async _runRequestFilters(
@@ -303,6 +344,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
      * @param {LollipopResponse} lollipopResponse
      * @param {(retvalFromController: any) => Promise<void>} followAction Method invoked, when the controller method is invoked
      * @returns {Promise<void>}
+     * @since 0.1.0
      * @memberof AbstractControllerAdapterModule
      */
     protected async _runFiltersAndFollow(

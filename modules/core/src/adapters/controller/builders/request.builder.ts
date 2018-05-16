@@ -9,6 +9,7 @@ import { AbstractControllerAdapterModule } from '../abstract-controller-adapter.
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class RequestBuilder
+ * @since 0.1.0
  * @extends {AbstractBuilder}
  */
 export class RequestBuilder extends AbstractBuilder {
@@ -19,36 +20,99 @@ export class RequestBuilder extends AbstractBuilder {
         this._request = new LollipopRequest();
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {RequestParamsMap} map
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withGetParams(map: RequestParamsMap): this {
         this._request.setGetParams(map);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {RequestParamsMap} map
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withPathParams(map: RequestParamsMap): this {
         this._request.setPathParams(map);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {RequestParamsMap} map
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withPostParams(map: RequestParamsMap): this {
         this._request.setPostParams(map);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {RequestParamsMap} map
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withHeaders(map: RequestParamsMap): this {
         this._request.setHeaders(map);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {RequestParamsMap} map
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withDeleteParams(map: RequestParamsMap): this {
         this._request.setPathParams(map);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {string} body
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withJsonBody(body: string): this {
         this._request.setJsonBody(body);
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {*} value
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof RequestBuilder
+     */
     public withParsedJson(value: any): this {
         this._request.setParsedJson(value);
         return this;
@@ -59,6 +123,7 @@ export class RequestBuilder extends AbstractBuilder {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {this}
+     * @since 0.1.0
      * @memberof RequestBuilder
      */
     public withSelfParsedJson(): this {
@@ -80,6 +145,7 @@ export class RequestBuilder extends AbstractBuilder {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {this}
+     * @since 0.1.0
      * @memberof RequestBuilder
      */
     public withReadOnly(): this {
@@ -94,6 +160,7 @@ export class RequestBuilder extends AbstractBuilder {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {AbstractControllerAdapterModule} value
      * @returns {this}
+     * @since 0.1.0
      * @memberof RequestBuilder
      */
     public withControllerAdapter(value: AbstractControllerAdapterModule): this {
@@ -106,6 +173,7 @@ export class RequestBuilder extends AbstractBuilder {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {LollipopRequest}
+     * @since 0.1.0
      * @memberof RequestBuilder
      */
     public getRequest(): LollipopRequest {

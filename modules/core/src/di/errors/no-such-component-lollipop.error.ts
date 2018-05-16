@@ -6,6 +6,7 @@ import { LollipopError } from '../../errors/lollipop.error';
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class NoSuchComponentLollipopError
+ * @since 0.1.0
  * @extends {LollipopError}
  */
 export class NoSuchComponentLollipopError extends LollipopError {

@@ -5,6 +5,7 @@ import { LollipopModuleConstructor, AbstractLollipopModule } from './abstract-lo
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @class LollipopModuleMap
  */
 export class LollipopModulesContainer {
@@ -16,6 +17,7 @@ export class LollipopModulesContainer {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {AbstractLollipopModule} module instance of the module
      * @returns {this} self
+     * @since 0.1.0
      * @memberof LollipopModulesContainer
      */
     public add(module: AbstractLollipopModule): this {
@@ -28,6 +30,7 @@ export class LollipopModulesContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {{[ key: string]: AbstractLollipopModule}} copy of the modules map
+     * @since 0.1.0
      * @memberof LollipopModulesContainer
      */
     public getModulesMap(): { [key: string]: AbstractLollipopModule } {
@@ -39,6 +42,7 @@ export class LollipopModulesContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {AbstractLollipopModule[]} List of registered modules
+     * @since 0.1.0
      * @memberof LollipopModulesContainer
      */
     public getModulesMapAsValuesArray(): AbstractLollipopModule[] {
@@ -52,6 +56,15 @@ export class LollipopModulesContainer {
         return retVal;
     }
 
+    /**
+     * Returns true if the module already exists in the map
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {(AbstractLollipopModule | LollipopModuleConstructor)} module
+     * @returns {boolean}
+     * @since 0.1.0
+     * @memberof LollipopModulesContainer
+     */
     public isModuleInMap(module: AbstractLollipopModule | LollipopModuleConstructor): boolean {
         const name = (module instanceof AbstractLollipopModule)
             ? module.constructor.name

@@ -7,6 +7,7 @@ import { ControllerAdapterUtil } from '../utils/controller-adapter.util';
  * @export
  * @param {string} path target path
  * @returns
+ * @since 0.1.0
  */
 export function Post(path: string) {
     return ControllerAdapterUtil.handleHttpMethodDecorator(path, 'handlePostDecorator', 'Post');

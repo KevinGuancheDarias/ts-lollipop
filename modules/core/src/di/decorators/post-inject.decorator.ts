@@ -42,6 +42,7 @@ async function _waitForDependenciesExecution(target: Object, container: DiContai
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @interface PostInjectMetadata
  */
 export interface PostInjectMetadata {
@@ -50,6 +51,7 @@ export interface PostInjectMetadata {
      * Name of the method that has the PostInject decorator
      *
      * @type {string}
+     * @since 0.1.0
      * @memberof PostInjectMetadata
      */
     methodName: string;
@@ -58,6 +60,7 @@ export interface PostInjectMetadata {
      * Has the promise returned from the execution of the method, if the method returns no Promise, has a resolved void promise
      *
      * @type {Promise<any>}
+     * @since 0.1.0
      * @memberof PostInjectMetadata
      */
     executionPromise?: Promise<any>;
@@ -70,6 +73,7 @@ export interface PostInjectMetadata {
  * @export
  * @param {Object} target Object to lookup for <i>PostInject</i> decorator
  * @returns {string} null if method has not <i>PostInject</i> decorator
+ * @since 0.1.0
  */
 export function findPostInjectMetadata(target: Object): PostInjectMetadata {
     return Reflect.getMetadata(POST_CONSTRUCT_METADATA_PROPERTY, target) || null;
@@ -83,6 +87,7 @@ export function findPostInjectMetadata(target: Object): PostInjectMetadata {
  * @param {Object} target Object to run
  * @param {DiContainer} container Container required to get components
  * @returns {Promise<void>} Resolves when the postInject method is resolved
+ * @since 0.1.0
  */
 export async function runPostInjectMethod(target: Object, container: DiContainer): Promise<void> {
     const metadata: PostInjectMetadata = findPostInjectMetadata(target);
@@ -118,6 +123,7 @@ export async function runPostInjectMethod(target: Object, container: DiContainer
  * @returns {MethodDecorator}
  * @throws {BadInputLollipopError} If target is not a method
  * @throws {DuplicatedDecoratorLollipopError} If more than one PostInject annotation has been defined in the object
+ * @since 0.1.0
  */
 export function PostInject(): MethodDecorator {
     return (target, methodName) => {

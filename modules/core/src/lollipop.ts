@@ -17,6 +17,7 @@ import { BadInputLollipopError } from './errors/bad-input-lollipop.error';
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @class Lollipop
  */
 export class Lollipop {
@@ -35,6 +36,7 @@ export class Lollipop {
      * @template T
      * @param {ModuleTypes} type Module type (used to filter)
      * @returns {T[]}
+     * @since 0.1.0
      * @memberof Lollipop
      */
     public getRegisteredModulesByType<T extends AbstractLollipopModule>(type: ModuleTypes): T[] {
@@ -48,12 +50,21 @@ export class Lollipop {
      * @template T
      * @param {ModuleTypes} type
      * @returns {T}
+     * @since 0.1.0
      * @memberof Lollipop
      */
     public getRegisteredModuleByType<T extends AbstractLollipopModule>(type: ModuleTypes): T {
         return this.getRegisteredModulesByType<T>(type)[0];
     }
 
+    /**
+     * Returns the controller adapters
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {AbstractControllerAdapterModule[]}
+     * @since 0.1.0
+     * @memberof Lollipop
+     */
     public getControllerAdapters(): AbstractControllerAdapterModule[] {
         return this.getRegisteredModulesByType<AbstractControllerAdapterModule>(ModuleTypes.CONTROLLER);
     }
@@ -64,6 +75,7 @@ export class Lollipop {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {...LollipopModuleConstructor[]|AbstractLollipopModule[]} modules list of modules to register
      * @returns {Promise<void>} Resolves when all modules are ready
+     * @since 0.1.0
      * @memberof Lollipop
      */
     public async registerModules(...modules: (LollipopModuleConstructor | AbstractLollipopModule)[]): Promise<void> {
@@ -86,6 +98,7 @@ export class Lollipop {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {Promise<void>} Resolves when the framework is ready
+     * @since 0.1.0
      * @memberof Lollipop
      */
     public async init(): Promise<void> {
@@ -106,6 +119,7 @@ export class Lollipop {
      * @param {FrameworkHooksEnum} hookType Type of hook, (ask yourself, when you want ro fire your hook)
      * @param {Function} hookBody function to execute when the hook is triggered
      * @param {Function} [hookName] name of the hook (to identify it better)
+     * @since 0.1.0
      * @memberof Lollipop
      */
     public registerHook(hookType: FrameworkHooksEnum, hookBody: Function, hookName?: string): void {
@@ -161,6 +175,7 @@ export class Lollipop {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @private
      * @returns {Promise<void>}
+     * @since 0.1.0
      * @memberof Lollipop
      */
     private async _handleControllersInit(): Promise<void> {
@@ -188,6 +203,7 @@ export class Lollipop {
      * @private
      * @param {FrameworkHooksEnum} hookType Type of hook
      * @returns {HookStorage} Existing hook storage or new one, if was not defined
+     * @since 0.1.0
      * @memberof Lollipop
      */
     private _findOrCreateHookStorage(hookType: FrameworkHooksEnum): HookStorage {

@@ -7,6 +7,7 @@ import { AbstractControllerAdapterModule } from '../abstract-controller-adapter.
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @interface RequestParamsMap
+ * @since 0.1.0
  */
 export interface RequestParamsMap {
     [key: string]: string;
@@ -25,6 +26,7 @@ export interface RequestParamsMap {
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class LollipopRequest
+ * @since 0.1.0
  */
 export class LollipopRequest {
 
@@ -47,22 +49,56 @@ export class LollipopRequest {
     private _parsedJson: any;
     private _authenticationMetadata: any;
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {string} path
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public setPath(path: string): this {
         this._checkReadOnly();
         this._path = path;
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {string}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getPath(): string {
         return this._path;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {AbstractControllerAdapterModule} value
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public setControllerAdapter(value: AbstractControllerAdapterModule): this {
         this._checkReadOnly();
         this._controllerAdapter = value;
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {AbstractControllerAdapterModule}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getControllerAdapter(): AbstractControllerAdapterModule {
         return this._controllerAdapter;
     }
@@ -73,6 +109,7 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {RequestParamsMap} inputMap
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof Request
      */
     public setGetParams(inputMap: RequestParamsMap): void {
@@ -80,6 +117,14 @@ export class LollipopRequest {
         this._getParams = inputMap;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {RequestParamsMap}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getGetParams(): RequestParamsMap {
         return this._getParams;
     }
@@ -90,6 +135,7 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {RequestParamsMap} inputMap
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof Request
      */
     public setPathParams(inputMap: RequestParamsMap): void {
@@ -97,6 +143,14 @@ export class LollipopRequest {
         this._pathParams = inputMap;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {RequestParamsMap}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getPathParams(): RequestParamsMap {
         return this._pathParams;
     }
@@ -107,13 +161,22 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {RequestParamsMap} inputMap
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof Request
      */
     public setPostParams(inputMap: RequestParamsMap): void {
         this._checkReadOnly();
         this._postParams = inputMap;
     }
-    public getPostParams<T>(): T;
+
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {RequestParamsMap}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getPostParams(): RequestParamsMap {
         return this._postParams;
     }
@@ -124,6 +187,7 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {RequestParamsMap} inputMap
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof LollipopRequest
      */
     public setHeaders(inputMap: RequestParamsMap): void {
@@ -131,6 +195,14 @@ export class LollipopRequest {
         this._headers = inputMap;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {RequestParamsMap}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getHeaders(): RequestParamsMap {
         return this._headers;
     }
@@ -141,6 +213,7 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {string} jsonBody
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof Request
      */
     public setJsonBody(jsonBody: string): void {
@@ -148,6 +221,14 @@ export class LollipopRequest {
         this._jsonBody = jsonBody;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {string}
+     * @since 0.1.0
+     * @memberof LollipopRequest
+     */
     public getJsonBody(): string {
         return this._jsonBody;
     }
@@ -158,6 +239,7 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {*} input
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof Request
      */
     public setParsedJson(input: any): void {
@@ -167,23 +249,14 @@ export class LollipopRequest {
 
     /**
      * Returns the parsed JSON <br>
-     * Because no type has been passed, return type will be <i>any</i>
-     *
-     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
-     * @returns {any} parsed JSON
-     * @memberof Request
-     */
-    public getParsedJson(): any;
-
-    /**
-     * Returns the parsed JSON <br>
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @template T Type of the JSON body
      * @returns {T} Parsed JSON with type <b>(NO instance)</b> specified by <i>T</i>
+     * @since 0.1.0
      * @memberof Request
      */
-    public getParsedJson<T>(): T {
+    public getParsedJson(): any {
         return this._parsedJson;
     }
 
@@ -194,6 +267,7 @@ export class LollipopRequest {
      * @template T
      * @param {T} value New metadata value
      * @throws {ReadOnlyLollipopError} When Request is in read only state
+     * @since 0.1.0
      * @memberof LollipopRequest
      */
     public setAuthenticationMetadata<T>(value: T): void {
@@ -207,9 +281,10 @@ export class LollipopRequest {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @template T type of the metadata object
      * @returns {T} stored metadata
+     * @since 0.1.0
      * @memberof LollipopRequest
      */
-    public getAuthenticationMetadata<T>(): T {
+    public getAuthenticationMetadata<T = any>(): T {
         return this._authenticationMetadata;
     }
 
@@ -217,6 +292,7 @@ export class LollipopRequest {
      * Defines the Request as read only (No further modifications are accepted)
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @since 0.1.0
      * @memberof LollipopRequest
      */
     public defineAsReadOnly(): void {

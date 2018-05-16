@@ -11,6 +11,7 @@ import { FrameworkHooksEnum } from '../../../hook/enums/framework-hooks.enum';
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @class ControllerAdapterUtil
  */
 export class ControllerAdapterUtil {
@@ -21,6 +22,7 @@ export class ControllerAdapterUtil {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @static
      * @returns {AbstractControllerAdapterModule[]}
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static getRegisteredControllers(): AbstractControllerAdapterModule[] {
@@ -36,6 +38,7 @@ export class ControllerAdapterUtil {
      * @param {keyof AbstractControllerAdapterModule} handlerMethod Method used to handle the decorator
      * @param {string} decoratorName Involved decorator
      * @returns {MethodDecorator} decorator body
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static handleHttpMethodDecorator(
@@ -77,6 +80,7 @@ export class ControllerAdapterUtil {
      * @param {Function} target Decorated class
      * @param {string} decoratorName Decorator name
      * @throws {BadInputLollipopError} When path is empty
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static checkNotEmptyPath(path: string, target: Function, decoratorName: string): void {
@@ -96,6 +100,7 @@ export class ControllerAdapterUtil {
      * @param {Function} target Class that is decorated
      * @param {string} [decoratorName='Controller'] Name of the decorator involved
      * @throws {BadInputLollipopError} When prefix is not valid
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static checkValidPathPrefix(path: string, target: Function, decoratorName = 'Controller'): void {
@@ -122,6 +127,7 @@ export class ControllerAdapterUtil {
      * @param {Object} target instance of the controller
      * @param {string} decoratorName name of the involved decorator
      * @throws {BadInputLollipopError} When path is not valid
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static checkValidRoutePath(path: string, target: Object, methodName: string, decoratorName: string): void {
@@ -148,6 +154,7 @@ export class ControllerAdapterUtil {
      * @static
      * @param {FunctionConstructor} target Tested class
      * @returns {boolean} True if <i>target</i> has @Controller decorator
+     * @since 0.1.0
      * @memberof ControllerAdapterUtil
      */
     public static isController(target: Function): boolean {

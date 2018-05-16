@@ -13,6 +13,7 @@ const CONTROLLER_METADATA_PROPERTY = 'Controller';
  * @export
  * @param {Function} target Target object constructor
  * @returns {string}
+ * @since 0.1.0
  */
 export function findControllerPrefix(target: Function): string {
     return Reflect.getMetadata(CONTROLLER_METADATA_PROPERTY, target);
@@ -25,6 +26,7 @@ export function findControllerPrefix(target: Function): string {
  * @export
  * @param {string} [prefix=/] Prefix to preprend to all routes found in this object
  * @returns {ClassDecorator}
+ * @since 0.1.0
  */
 export function Controller(prefix = '/'): ClassDecorator {
     return target => {

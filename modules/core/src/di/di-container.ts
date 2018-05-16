@@ -8,6 +8,13 @@ import { findPostInjectMetadata, runPostInjectMethod } from './decorators/post-i
 import { CircularDependencyError } from './errors/circular-dependency-lollipop.error';
 import { Constructor } from '../types/constructor';
 
+/**
+ * Stores all the Services
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @class DiContainer
+ */
 export class DiContainer {
     private static readonly DEFAULT_MAX_TREE_COUNT = 2000;
     private _storageByIdentifier: { [key: string]: any } = {};
@@ -20,6 +27,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {boolean} [_createDependencyDebugTree=false] If true, will try to detect circular dependency injections, and notify it
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public constructor(private _createDependencyDebugTree = false, private _maxTreeCount: number = DiContainer.DEFAULT_MAX_TREE_COUNT) {
@@ -32,6 +40,7 @@ export class DiContainer {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {string} injectionName Name of the current component to inject
      * @returns {number} current injection count, -1 if DependencyDebugTree is disabled
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public addToDebugTreeCount(injectionName: string): number {
@@ -49,8 +58,9 @@ export class DiContainer {
      * Checks if there is a circular dependency injection
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
-     * @memberof DiContainer
      * @throws {CircularDependencyError} When there is a circular dependency injection
+     * @since 0.1.0
+     * @memberof DiContainer
      */
     public checkDebugTree(): void {
         if (this._debugTreeCount >= this._maxTreeCount) {
@@ -68,6 +78,7 @@ export class DiContainer {
      * @returns {*}
      * @throws {BadInputLollipopError} When <i>componentIdentifier</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public getComponent(componentIdentifier: string): any;
@@ -82,6 +93,7 @@ export class DiContainer {
      * @returns {T}
      * @throws {BadInputLollipopError} When <i>componentType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @since 0.1.0
      * @memberof DiContainer
      */
     getComponent<T>(componentType: Constructor<T>): T;
@@ -95,6 +107,7 @@ export class DiContainer {
      * @returns {T} instance
      * @throws {BadInputLollipopError} When <i>componentNameOrType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @since 0.1.0
      * @memberof Container
      */
     public getComponent<T>(componentNameOrType: string | Constructor<T>): T {
@@ -115,6 +128,7 @@ export class DiContainer {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {FunctionConstructor} componentConstructor
      * @param {string} [componentIdentifier]
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public registerComponent(componentConstructor: FunctionConstructor, componentIdentifier?: string): void;
@@ -124,6 +138,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {ComponentType} component
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public registerComponent(component: ComponentType);
@@ -134,6 +149,7 @@ export class DiContainer {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {FunctionConstructor|ComponentType} componentConstructor constructor function, or component type
      * @param {string} [componentIdentifier]
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public registerComponent(componentConstructor: FunctionConstructor | ComponentType, componentIdentifier?: string): void {
@@ -156,6 +172,7 @@ export class DiContainer {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {*} instance Instance of component
      * @param {string} [identifier] target component identifier
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public registerInstancedComponent(instance: any, identifier?: string) {
@@ -176,6 +193,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {Function} target
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public injectInto(target: Function): void {
@@ -189,6 +207,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {Promise<void>} resolves, when all the dependencies has been injected
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public injectAllDependencies(): void {
@@ -209,6 +228,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {Promise<void>} Resolves when all the post inject methods have been executed
+     * @since 0.1.0
      * @memberof DiContainer
      */
     public async triggerPostInject(): Promise<void> {
@@ -253,6 +273,7 @@ export class DiContainer {
      * @param {Function} target object that needs this dependency
      * @returns {*} resolved instance
      * @throws {InjectionLollipopError} When the component couldn't be found in the Container's storage
+     * @since 0.1.0
      * @memberof DiContainer
      */
     private _resolveDependency(dependency: ComponentDependency, target: Function): any {

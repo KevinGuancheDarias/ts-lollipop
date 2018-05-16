@@ -6,6 +6,7 @@ import { RequestFilter } from './request-filter';
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @interface ControllerAdapterConfiguration
  */
 export interface ControllerAdapterConfiguration {
@@ -14,6 +15,7 @@ export interface ControllerAdapterConfiguration {
      * Security adapters to use
      *
      * @type {AbstractControllerSecurityAdapter[]}
+     * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
     securityAdapters?: AbstractControllerSecurityAdapter[];
@@ -22,6 +24,7 @@ export interface ControllerAdapterConfiguration {
      * Request filters that will run before the authentication
      *
      * @type {RequestFilter[]}
+     * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
     beforeAuthRequestFilters?: RequestFilter[];
@@ -30,6 +33,7 @@ export interface ControllerAdapterConfiguration {
      * Request filters, that will run <b>after</b> the authentication (so, will have authentication objects available)
      *
      * @type {RequestFilter[]}
+     * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
     afterAuthRequestFilters?: RequestFilter[];
@@ -38,6 +42,7 @@ export interface ControllerAdapterConfiguration {
      * Directories, that will be scanned by the controller
      *
      * @type {string[]}
+     * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
     directories: string[];
@@ -46,6 +51,7 @@ export interface ControllerAdapterConfiguration {
      * HTTP Port that the controller will use to listen
      *
      * @type {number}
+     * @since 0.1.0
      * @memberof ControllerAdapterConfiguration
      */
     listenPort: number;

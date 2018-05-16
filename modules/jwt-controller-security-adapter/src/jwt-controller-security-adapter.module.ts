@@ -10,6 +10,7 @@ import { JwtControllerSecurityOptions } from './types/jwt-controller-security-op
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class JwtControllerSecurityAdapterModule
+ * @since 0.1.0
  * @extends {AbstractControllerSecurityAdapter}
  */
 export class JwtControllerSecurityAdapterModule extends AbstractControllerSecurityAdapter {
@@ -32,6 +33,7 @@ export class JwtControllerSecurityAdapterModule extends AbstractControllerSecuri
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {*} tokenBody
      * @returns {string}
+     * @since 0.1.0
      * @memberof JwtControllerSecurityAdapterModule
      */
     public createToken(tokenBody: any): string {

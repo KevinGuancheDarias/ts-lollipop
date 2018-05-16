@@ -13,6 +13,7 @@ const PRODUCES_METADATA_PROPERTY = 'Produces';
  * @param {T} target Destination object
  * @param {keyof T} method Method that has the decorator
  * @returns {MediaTypeEnum}
+ * @since 0.1.0
  */
 export function findProducesValue<T>(target: T, method: keyof T): MediaTypeEnum {
     return Reflect.getMetadata(PRODUCES_METADATA_PROPERTY, target, method);
@@ -26,6 +27,7 @@ export function findProducesValue<T>(target: T, method: keyof T): MediaTypeEnum 
  * @export
  * @param {MediaTypeEnum} mediaType MediaType to use
  * @returns {MethodDecorator}
+ * @since 0.1.0
  */
 export function Produces(mediaType: MediaTypeEnum): MethodDecorator {
     return (target, method: string | symbol) => {

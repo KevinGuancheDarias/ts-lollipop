@@ -8,6 +8,7 @@ import { ControllerAdapterUtil } from '../utils/controller-adapter.util';
  * @export
  * @param {RouteConfig} routeConfig Configuration
  * @returns {MethodDecorator}
+ * @since 0.1.0
  */
 export function Route(routeConfig: RouteConfig): MethodDecorator {
     return (target, method) => {

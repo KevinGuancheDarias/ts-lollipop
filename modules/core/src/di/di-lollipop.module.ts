@@ -12,10 +12,21 @@ import { ModuleTypes } from '../enums/module-types.enum';
 import { MetadataUtil } from '../utils/metadata.util';
 import { Constructor } from '../types/constructor';
 
+/**
+ * Lollipop's DI implementation <br>
+ * For now we don't provide an "adapter" for DI
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @class DiLollipopModule
+ * @since 0.1.0
+ * @extends {AbstractLollipopModule}
+ */
 export class DiLollipopModule extends AbstractLollipopModule {
     private _settings: Configuration;
     private _diContainer: DiContainer;
     private _log: LollipopLogger;
+
 
     public getModuleType(): ModuleTypes {
         return ModuleTypes.DI;
@@ -33,6 +44,7 @@ export class DiLollipopModule extends AbstractLollipopModule {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @returns {DiContainer}
+     * @since 0.1.0
      * @memberof DiLollipopModule
      */
     public getContainer(): DiContainer {
@@ -48,7 +60,8 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * @returns {*}
      * @throws {BadInputLollipopError} When <i>componentIdentifier</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
-     * @memberof DiContainer
+     * @since 0.1.0
+     * @memberof DiLollipopModule
      */
     public getComponent(componentIdentifier: string): any;
 
@@ -62,7 +75,8 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * @returns {T}
      * @throws {BadInputLollipopError} When <i>componentType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
-     * @memberof DiContainer
+     * @since 0.1.0
+     * @memberof DiLollipopModule
      */
     public getComponent<T>(componentType: Constructor<T>): T;
 
@@ -75,6 +89,7 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * @returns {T}
      * @throws {BadInputLollipopError} When <i>componentNameOrType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @since 0.1.0
      * @memberof DiLollipopModule
      */
     public getComponent<T>(componentNameOrType: string | Constructor<T>): T {
@@ -85,7 +100,8 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * Searches the components in the expected folder
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
-     * @memberof Container
+     * @since 0.1.0
+     * @memberof DiLollipopModule
      */
     public async findAndRegisterComponents(): Promise<void> {
         const files: string[] = await MetadataUtil.findAllTypescriptSourceFiles([this._settings.basePath]);

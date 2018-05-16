@@ -6,6 +6,7 @@ import { PromiseUtil } from '../utils/promise.util';
  *
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
+ * @since 0.1.0
  * @class HookStorage
  */
 export class HookStorage {
@@ -27,6 +28,7 @@ export class HookStorage {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {Function} hookBody body of the hook
      * @returns {number}  Index in the unnamed array
+     * @since 0.1.0
      * @memberof HookStorage
      */
     public registerHook(hookBody: Function): number;
@@ -37,6 +39,7 @@ export class HookStorage {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {Function} hookBody
      * @param {string} name
+     * @since 0.1.0
      * @memberof HookStorage
      */
     public registerHook(hookBody: Function, name: string): void;
@@ -48,6 +51,7 @@ export class HookStorage {
      * @param {Function} hookBody hook to execute
      * @param {string} [name] Name of the hook, if not specified, not be easy to identify the hook
      * @returns {(number | void)} If name is not specified returns the index of the hook in the HookStorage array
+     * @since 0.1.0
      * @memberof HookStorage
      */
     public registerHook(hookBody: Function, name?: string): number | void {
@@ -64,6 +68,7 @@ export class HookStorage {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {*} context Lollipop ContextHolder
      * @returns {Promise<void>} Resolves when all hooks ared resolved (Remember, hooks can return a promise)
+     * @since 0.1.0
      * @memberof HookStorage
      */
     public async runAllHooks(context: any): Promise<void> {

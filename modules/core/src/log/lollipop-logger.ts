@@ -1,15 +1,24 @@
 import { Log, Logger } from 'ng2-logger';
 import { ConfigurationHolder } from '../config/configuration.holder';
 
+/**
+ *
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @class LollipopLogger
+ */
 export class LollipopLogger {
     private _logger: Logger<any>;
 
     /**
-     * Resolves when the configuration has been loaded <br>
+     * Writes DEBUG level messageResolves when the configuration has been loaded <br>
      * Used to delay log messages
      *
      * @private
      * @type {Promise<void>}
+     * @since 0.1.0
      * @memberof LollipopLogger
      */
     private _isReady: Promise<void>;
@@ -21,21 +30,57 @@ export class LollipopLogger {
         });
     }
 
+    /**
+     * Writes DEBUG level messageWrite debug messages
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {...string[]} message
+     * @returns {Promise<void>}
+     * @since 0.1.0
+     * @memberof LollipopLogger
+     */
     public async debug(...message: string[]): Promise<void> {
         await this._isReady;
         this._logger.d(this._findCallerMethodName(), ...message);
     }
 
+    /**
+     * Writes INFO level message
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {...string[]} message
+     * @returns {Promise<void>}
+     * @since 0.1.0
+     * @memberof LollipopLogger
+     */
     public async info(...message: string[]): Promise<void> {
         await this._isReady;
         this._logger.i(this._findCallerMethodName(), ...message);
     }
 
+    /**
+     * Writes WARN level message
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {...string[]} message
+     * @returns {Promise<void>}
+     * @since 0.1.0
+     * @memberof LollipopLogger
+     */
     public async warn(...message: string[]): Promise<void> {
         await this._isReady;
         this._logger.w(this._findCallerMethodName(), ...message);
     }
 
+    /**
+     * Writes ERROR level message
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {...string[]} message
+     * @returns {Promise<void>}
+     * @since 0.1.0
+     * @memberof LollipopLogger
+     */
     public async error(...message: string[]): Promise<void> {
         await this._isReady;
         this._logger.er(this._findCallerMethodName(), ...message);

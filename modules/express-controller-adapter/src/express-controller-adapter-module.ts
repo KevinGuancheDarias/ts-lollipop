@@ -10,6 +10,15 @@ import { LollipopResponse, RequestParamsMap, LollipopRequest } from '@ts-lollipo
 import { ExpressLollipopResponse } from './pojos/express-lollipop-response';
 import { RequestBuilder } from '@ts-lollipop/core/dist/adapters/controller/builders/request.builder';
 
+/**
+ *
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @class ExpressControllerAdapterModule
+ * @since 0.1.0
+ * @extends {AbstractControllerAdapterModule}
+ */
 export class ExpressControllerAdapterModule extends AbstractControllerAdapterModule {
 
     private _log: LollipopLogger = new LollipopLogger(this.constructor);

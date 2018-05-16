@@ -10,6 +10,7 @@ const SECURITY_METADATA_PROPERTY = 'LollipopSecurity';
  * @param {*} target
  * @param {*} [method]
  * @returns {ControllerSecurityDecoratorOptions} Information or null
+ * @since 0.1.0
  */
 export function findSecurityDecoratorMetadata(target: any, method?: any): ControllerSecurityDecoratorOptions {
     let retVal: ControllerSecurityDecoratorOptions;
@@ -38,6 +39,7 @@ export function findSecurityDecoratorMetadata(target: any, method?: any): Contro
  * @param {*} target
  * @param {*} method
  * @returns {boolean}
+ * @since 0.1.0
  */
 export function isExcluded(target: any, method: any): boolean {
     const metadata = Reflect.getMetadata(SECURITY_METADATA_PROPERTY, target, method);
@@ -50,28 +52,58 @@ export function isExcluded(target: any, method: any): boolean {
 }
 
 export namespace Security {
+    /**
+     * Applies Security for given class
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @export
+     * @param {ControllerSecurityDecoratorOptions} [options]
+     * @returns {ClassDecorator}
+     * @since 0.1.0
+     */
     export function forClass(options?: ControllerSecurityDecoratorOptions): ClassDecorator {
         return target => {
             Reflect.defineMetadata(SECURITY_METADATA_PROPERTY, options || {}, target);
         };
     }
+
+    /**
+     * Applies security for given method
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @export
+     * @param {ControllerSecurityDecoratorOptions} [options]
+     * @returns {MethodDecorator}
+     * @since 0.1.0
+     */
     export function forMethod(options?: ControllerSecurityDecoratorOptions): MethodDecorator {
         return (target, method) => {
             Reflect.defineMetadata(SECURITY_METADATA_PROPERTY, options || {}, target, method);
         };
     }
 
+    /**
+     * Excludes a class from the security <br>
+     * Useful when module is configured to secure all controllers by default
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @export
+     * @returns {ClassDecorator}
+     * @since 0.1.0
+     */
     export function excludeClass(): ClassDecorator {
         return target => {
             Reflect.defineMetadata(SECURITY_METADATA_PROPERTY, { excluded: true }, target);
         };
     }
     /**
-     * Excludes a method from the security, useful when class has @Security decorator
+     * Excludes a method from the security <br>
+     * Useful when class has @Security decorator
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @export
      * @returns {MethodDecorator}
+     * @since 0.1.0
      */
     export function excludeMethod(): MethodDecorator {
         return (target, method) => {

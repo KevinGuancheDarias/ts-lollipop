@@ -5,6 +5,16 @@ import { LollipopLogger } from './log/lollipop-logger';
 import { Lollipop } from './lollipop';
 import { DiLollipopModule } from './di/di-lollipop.module';
 
+/**
+ * Has the Framework context <br>
+ * Stores hooks <br>
+ * Stores the lollipop instance<br>
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @class ContextHolder
+ */
 export class ContextHolder {
     private static readonly _LOGGER: LollipopLogger = new LollipopLogger(ContextHolder);
     private static _diModule: DiLollipopModule;
@@ -17,12 +27,20 @@ export class ContextHolder {
      * @readonly
      * @static
      * @type {HookEntry[]}
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static get hookSimpleStorage(): HookEntry[] {
         return [...this._hookSimpleStorage];
     }
 
+    /**
+     *
+     *
+     * @static
+     * @since 0.1.0
+     * @memberof ContextHolder
+     */
     public static set hookSimpleStorage(value: HookEntry[]) {
         ContextHolder._LOGGER.error('Cannot define hookSimpleStorage with value ' + JSON.stringify(value));
         throw new ReadOnlyLollipopError();
@@ -34,6 +52,7 @@ export class ContextHolder {
      * @private
      * @static
      * @type {HookEntry[]}
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     private static _hookSimpleStorage: HookEntry[] = [];
@@ -63,6 +82,7 @@ export class ContextHolder {
      * @static
      * @param {DiLollipopModule} value Instance of DI module
      * @throws {LifeCycleLollipopError} Trying to define it when context is started
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static setDiModule(value: DiLollipopModule): void {
@@ -79,6 +99,7 @@ export class ContextHolder {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @static
      * @param {...HookEntry[]} hookEntry Entries to register
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static registerHooks(...hookEntry: HookEntry[]): void {
@@ -98,6 +119,7 @@ export class ContextHolder {
      * @param {string} [message='Unexpected lifecycle error']
      * @returns {typeof ContextHolder} context holder
      * @throws {LifeCycleLollipopError} When context is not started
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static checkIsStarted(message = 'Unexpected lifecycle error'): typeof ContextHolder {
@@ -112,6 +134,7 @@ export class ContextHolder {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @static
+     * @since 0.1.0
      * @memberof ContextHolder
      * @returns {ContextHolder}
      */
@@ -127,6 +150,7 @@ export class ContextHolder {
      * @static
      * @returns {Lollipop}
      * @throws {LifeCycleLollipopError} When this function is invoked before the Context has been defined as ready
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static getLollipop(): Lollipop {
@@ -140,6 +164,7 @@ export class ContextHolder {
      * @static
      * @param {Lollipop} value Lollipop instance
      * @throws {LifeCycleLollipopError} Can't define Lollipop instance when context is already started
+     * @since 0.1.0
      * @memberof ContextHolder
      */
     public static defineLollipopInstance(value: Lollipop) {

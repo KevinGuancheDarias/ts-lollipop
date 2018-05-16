@@ -1,3 +1,11 @@
+/**
+ * Helper functions for interacting with Promises
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @class PromiseUtil
+ */
 export class PromiseUtil {
 
     /**
@@ -8,6 +16,7 @@ export class PromiseUtil {
      * @param {Function[]} promiseFunctions functions to run that returns a promise
      * @returns {Promise<void>} Resolves when all promises has been executed
      * @static
+     * @since 0.1.0
      * @memberof PromiseUtil
      */
     public static async runPromisesSequentially(context: any, promiseFunctions: Function[]): Promise<void> {

@@ -6,10 +6,27 @@ import { RequestContext } from '../controller/types/request-context';
 import { BadInputLollipopError } from '../../errors/bad-input-lollipop.error';
 import { AbstractControllerAdapterModule } from '../controller/abstract-controller-adapter.module';
 
+/**
+ * Use to force type to be AbstractControllerSecurityAdapter
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @interface ControllerSecurityAdapterConstructor
+ */
 export interface ControllerSecurityAdapterConstructor {
     new(): AbstractControllerSecurityAdapter;
 }
 
+/**
+ * Adapters that want to be used for security, must extend this class
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @abstract
+ * @since 0.1.0
+ * @class AbstractControllerSecurityAdapter
+ */
 export abstract class AbstractControllerSecurityAdapter {
 
     /**
@@ -17,10 +34,19 @@ export abstract class AbstractControllerSecurityAdapter {
      *
      * @protected
      * @static
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     protected static readonly _HTTP_DEBUG_HEADER = 'X-Lollipop-Authentication-Status';
 
+    /**
+     *
+     *
+     * @protected
+     * @type {AbstractControllerAdapterModule}
+     * @since 0.1.0
+     * @memberof AbstractControllerSecurityAdapter
+     */
     protected _targetController: AbstractControllerAdapterModule;
 
     /**
@@ -30,6 +56,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @abstract
      * @param {RequestContext} request
      * @returns {boolean}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public abstract supports(requestContext: RequestContext): boolean;
@@ -41,6 +68,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @abstract
      * @param {RequestContext} requestContext
      * @returns {Promise<any>}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public abstract createRequestSecurityObject(requestContext: RequestContext): Promise<any>;
@@ -53,6 +81,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @abstract
      * @param {RequestContext} requestcontext
      * @returns {boolean} Returns true, if the credentials are valid
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public abstract isAuthenticated(requestContext: RequestContext): boolean;
@@ -66,11 +95,28 @@ export abstract class AbstractControllerSecurityAdapter {
         }
     }
 
+    /**
+     * Defines the target controller adapter
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {AbstractControllerAdapterModule} value
+     * @returns {this}
+     * @since 0.1.0
+     * @memberof AbstractControllerSecurityAdapter
+     */
     public setControllerAdapter(value: AbstractControllerAdapterModule): this {
         this._targetController = value;
         return this;
     }
 
+    /**
+     *
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {AbstractControllerAdapterModule}
+     * @since 0.1.0
+     * @memberof AbstractControllerSecurityAdapter
+     */
     public getControllerAdapter(): AbstractControllerAdapterModule {
         return this._targetController;
     }
@@ -83,6 +129,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {T} target instance
      * @param {keyof T} method
      * @returns {RequestFilter}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public findMethodSecurityFilter<T>(target: T, method: keyof T): RequestFilter {
@@ -119,6 +166,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestContext
      * @param {ControllerSecurityDecoratorOptions} securityMetadata
      * @returns {Promise<boolean>} True If the authentication succed
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public async runModulesValidationActions(
@@ -156,6 +204,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {RequestContext} requestContext
      * @returns {Promise<boolean>}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     public async runValidationAction(requestContext: RequestContext): Promise<boolean> {
@@ -174,6 +223,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @protected
      * @param {RequestContext} requestContext
      * @returns {Promise<void>}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     protected async _buildAuthenthicationMetadata(requestContext: RequestContext): Promise<void> {
@@ -188,6 +238,7 @@ export abstract class AbstractControllerSecurityAdapter {
      * @param {RequestContext} requestContext THIS METHOD alters this object
      * @param {ControllerSecurityDecoratorOptions} securityMetadata
      * @returns {Promise<boolean>}
+     * @since 0.1.0
      * @memberof AbstractControllerSecurityAdapter
      */
     private async _executeSecurityMethod(

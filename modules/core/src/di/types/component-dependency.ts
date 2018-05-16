@@ -7,6 +7,7 @@ import { Constructor } from '../../types/constructor';
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @interface ComponentDependency
+ * @since 0.1.0
  * @extends {ComponentType}
  */
 export interface ComponentDependency<T extends Constructor<T>  = any> extends ComponentType<T> {

@@ -11,6 +11,7 @@ const INJECT_METADATA_PROPERTY = 'Inject';
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @param {*} target Class that has Inject decorators
  * @param {ComponentDependency} dependency Dependency to append
+ * @since 0.1.0
  */
 function _appendDependenciesMetadata(target: Function | Object, dependency: ComponentDependency): void {
     let currentDependencies: ComponentDependency[] = findDependencies(target);
@@ -32,11 +33,21 @@ function _appendDependenciesMetadata(target: Function | Object, dependency: Comp
  * @export
  * @param {Function|Object} target Target instance
  * @returns {ComponentDependency[]} An array of dependencies
+ * @since 0.1.0
  */
 export function findDependencies(target: Object | Function): ComponentDependency[] {
     return Reflect.getMetadata(INJECT_METADATA_PROPERTY, target) || [];
 }
 
+/**
+ * Injects the service instance into the decorated property
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @param {(string | Function)} [identifierOrType] Service identifier, or type
+ * @returns {PropertyDecorator}
+ * @since 0.1.0
+ */
 export function Inject(identifierOrType?: string | Function): PropertyDecorator {
     return (target: any, targetProperty: string | symbol) => {
         if (typeof targetProperty === 'string') {

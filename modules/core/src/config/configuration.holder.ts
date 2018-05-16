@@ -2,6 +2,14 @@ import { readFile, exists } from 'mz/fs';
 import { BadConfigFileLollipopError } from './errors/bad-config-file-lollipop.error';
 import { Configuration } from './types/configuration';
 
+/**
+ * Can be used to access the configuration from outside the context
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @class ConfigurationHolder
+ */
 export class ConfigurationHolder {
 
     /**
@@ -10,6 +18,7 @@ export class ConfigurationHolder {
      * @readonly
      * @static
      * @type {Promise<void>}
+     * @since 0.1.0
      * @memberof ConfigurationHolder
      */
     public static get isReady(): Promise<void> {
@@ -27,7 +36,8 @@ export class ConfigurationHolder {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @param {string} [customPath] Custom path to config.json (ignored, if not first load)
      * @returns {Promise<void>} Resolves when the configuration has been loaded
-     * @memberof ConfigurationManager
+     * @since 0.1.0
+     * @memberof ConfigurationHolder
      */
     public static async loadConfiguration(customPath?: string): Promise<void> {
         if (!this._settings) {
@@ -43,6 +53,7 @@ export class ConfigurationHolder {
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @static
      * @returns {Promise<Configuration>}
+     * @since 0.1.0
      * @memberof ConfigurationHolder
      */
     public static async getConfiguration(): Promise<Configuration> {

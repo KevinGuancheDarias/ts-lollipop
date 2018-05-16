@@ -1,5 +1,13 @@
 import { ModuleTypes } from './enums/module-types.enum';
 
+/**
+ * Forces class to be an instanceof AbstractLollipopModule
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @interface LollipopModuleConstructor
+ */
 export interface LollipopModuleConstructor {
     new(): AbstractLollipopModule;
 }
@@ -10,10 +18,20 @@ export interface LollipopModuleConstructor {
  * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
  * @export
  * @class LollipopModule
+ * @since 0.1.0
  * @extends {LollipopModuleConstructor}
  */
 export abstract class AbstractLollipopModule {
 
+    /**
+     * Returns the type of the module
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @abstract
+     * @returns {ModuleTypes}
+     * @since 0.1.0
+     * @memberof AbstractLollipopModule
+     */
     public abstract getModuleType(): ModuleTypes;
 
     /**
@@ -24,6 +42,7 @@ export abstract class AbstractLollipopModule {
      * @abstract
      * @param {any} config Module configuration
      * @returns {Promise<void>} Resolves when the module is ready
+     * @since 0.1.0
      * @memberof LollipopModule
      */
     public abstract registerModule(config?: any): Promise<void>;

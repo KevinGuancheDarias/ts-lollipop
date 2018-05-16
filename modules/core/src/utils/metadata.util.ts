@@ -4,6 +4,14 @@ import { exists } from 'mz/fs';
 import { lstatSync } from 'fs';
 import { BadInputLollipopError } from '../errors/bad-input-lollipop.error';
 
+/**
+ * Helper class for handling metadata (reflect type metadata)
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @since 0.1.0
+ * @class MetadataUtil
+ */
 export class MetadataUtil {
 
     /**
@@ -14,6 +22,7 @@ export class MetadataUtil {
      * @param {string[]} directories Input directories
      * @throws {BadInputLollipopError} If one of the passed directories doesn't exists
      * @returns {Promise<string[]>} an array containing all the files
+     * @since 0.1.0
      * @memberof MetadataUtil
      */
     public static async findAllTypescriptSourceFiles(directories: string[]): Promise<string[]> {

@@ -5,6 +5,15 @@ import { ControllerAdapterUtil } from '../../controller/utils/controller-adapter
 import { ModuleNotFoundLollipopError } from '../../../errors/module-not-found-lollipop.error';
 import { BadInputLollipopError } from '../../../errors/bad-input-lollipop.error';
 
+/**
+ * Finds out the security module
+ *
+ * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+ * @export
+ * @param {ControllerSecurityAdapterConstructor} [specificModule] If multiple modules are registered, find the one with that class
+ * @returns {PropertyDecorator}
+ * @since 0.1.0
+ */
 export function SecurityModule(specificModule?: ControllerSecurityAdapterConstructor): PropertyDecorator {
     return (target, prop) => {
         ContextHolder.registerHooks({
