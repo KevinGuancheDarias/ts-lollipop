@@ -10,6 +10,7 @@ import { ProgrammingLollipopError } from '../errors/programming-lollipop.error';
 import { _findComponentMetadata } from './decorators/component.decorator';
 import { ModuleTypes } from '../enums/module-types.enum';
 import { MetadataUtil } from '../utils/metadata.util';
+import { Constructor } from '../types/constructor';
 
 export class DiLollipopModule extends AbstractLollipopModule {
     private _settings: Configuration;
@@ -39,6 +40,33 @@ export class DiLollipopModule extends AbstractLollipopModule {
     }
 
     /**
+     * Gets a component using its identifier <br>
+     * If you want to get by type, use the other call signature (with the class as first argument)
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {string} componentIdentifier ÇomponentIdentifier
+     * @returns {*}
+     * @throws {BadInputLollipopError} When <i>componentIdentifier</i> is not valid
+     * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @memberof DiContainer
+     */
+    public getComponent(componentIdentifier: string): any;
+
+    /**
+     * Gets a component by type
+     * If you want to get by identifier, use the other call signature (with string as first argument)
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @template T class of the component to return
+     * @param {() => T} componentType
+     * @returns {T}
+     * @throws {BadInputLollipopError} When <i>componentType</i> is not valid
+     * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @memberof DiContainer
+     */
+    public getComponent<T extends Constructor<T>>(componentType: Constructor<T>): T;
+
+    /**
      * Gets a component from the container storage
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
@@ -49,8 +77,8 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof DiLollipopModule
      */
-    public getComponent<T extends Function>(componentNameOrType: string | T): T {
-        return this._diContainer.getComponent<T>(componentNameOrType);
+    public getComponent<T extends Constructor<T>>(componentNameOrType: string | T): T {
+        return this._diContainer.getComponent<T>(<any>componentNameOrType);
     }
 
     /**

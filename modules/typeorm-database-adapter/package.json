@@ -1,7 +1,11 @@
 {
   "name": "@ts-lollipop/typeorm-database-adapter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lollipop framework TypeOrm Database Adapter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KevinGuancheDarias/ts-lollipop.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -17,7 +21,7 @@
     "typeorm": "^0.2.5"
   },
   "peerDependencies": {
-    "@ts-lollipop/core": "0.1.0"
+    "@ts-lollipop/core": "0.1.1"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",

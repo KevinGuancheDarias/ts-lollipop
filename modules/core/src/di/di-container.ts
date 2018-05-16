@@ -6,6 +6,7 @@ import { ComponentDependency } from './types/component-dependency';
 import { InjectionLollipopError } from './errors/injection-lollipop.error';
 import { findPostInjectMetadata, runPostInjectMethod } from './decorators/post-inject.decorator';
 import { CircularDependencyError } from './errors/circular-dependency-lollipop.error';
+import { Constructor } from '../types/constructor';
 
 export class DiContainer {
     private static readonly DEFAULT_MAX_TREE_COUNT = 2000;
@@ -59,17 +60,44 @@ export class DiContainer {
     }
 
     /**
+     * Gets a component using its identifier <br>
+     * If you want to get by type, use the other call signature (with the class as first argument)
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @param {string} componentIdentifier ÇomponentIdentifier
+     * @returns {*}
+     * @throws {BadInputLollipopError} When <i>componentIdentifier</i> is not valid
+     * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @memberof DiContainer
+     */
+    public getComponent(componentIdentifier: string): any;
+
+    /**
+     * Gets a component by type
+     * If you want to get by identifier, use the other call signature (with string as first argument)
+     *
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @template T class of the component to return
+     * @param {() => T} componentType
+     * @returns {T}
+     * @throws {BadInputLollipopError} When <i>componentType</i> is not valid
+     * @throws {NoSuchComponentLollipopError} When component was not found in the Container
+     * @memberof DiContainer
+     */
+    public getComponent<T extends Constructor<T>>(componentType: Constructor<T>): T;
+
+    /**
      * Gets a component from the container storage
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @template T class of the component to return
-     * @param {(string | T)} componentNameOrType
-     * @returns {T}
+     * @param {(string | Constructor<T>)} componentNameOrType
+     * @returns {T} instance
      * @throws {BadInputLollipopError} When <i>componentNameOrType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof Container
      */
-    public getComponent<T extends Function>(componentNameOrType: string | T): T {
+    public getComponent<T extends Constructor<T>>(componentNameOrType: string | Constructor<T>): T {
         let instance: any;
         if (typeof componentNameOrType === 'string') {
             instance = this._getComponentByString(componentNameOrType);

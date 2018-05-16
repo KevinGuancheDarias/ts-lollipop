@@ -1,3 +1,5 @@
+import { Constructor } from '../../types/constructor';
+
 /**
  * Represents a component pair "constructor" and identifier
  *
@@ -5,7 +7,7 @@
  * @export
  * @interface ComponentType
  */
-export interface ComponentType {
-    constructor: FunctionConstructor;
+export interface ComponentType<T extends Constructor<T> = any> {
+    constructor: Constructor<T>;
     identifier?: string;
 }

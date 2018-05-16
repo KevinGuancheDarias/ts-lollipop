@@ -1,7 +1,11 @@
 {
   "name": "lollipop-test",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lollipop framework core",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KevinGuancheDarias/ts-lollipop.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -15,10 +19,10 @@
   "author": "Kevin Guanche Darias",
   "license": "MIT",
   "dependencies": {
-    "@ts-lollipop/core": "0.1.0",
-    "@ts-lollipop/express-controller-adapter": "0.1.0",
-    "@ts-lollipop/jwt-controller-security-adapter": "0.1.0",
-    "@ts-lollipop/typeorm-database-adapter": "0.1.0",
+    "@ts-lollipop/core": "0.1.1",
+    "@ts-lollipop/express-controller-adapter": "0.1.1",
+    "@ts-lollipop/jwt-controller-security-adapter": "0.1.1",
+    "@ts-lollipop/typeorm-database-adapter": "0.1.1",
     "@types/node": "^10.0.9",
     "sqlite3": "^4.0.0",
     "ts-node": "^6.0.3",

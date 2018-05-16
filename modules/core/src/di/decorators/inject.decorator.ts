@@ -39,22 +39,24 @@ export function findDependencies(target: Object | Function): ComponentDependency
 
 export function Inject(identifierOrType?: string | Function): PropertyDecorator {
     return (target: any, targetProperty: string | symbol) => {
-        let targetStorage = identifierOrType;
-        if (!targetStorage) {
-            targetStorage = Reflect.getMetadata('design:type', target, targetProperty);
-            if (typeof targetStorage !== 'function') {
-                throw new InjectionLollipopError(`Could not detect type for ${target.targetProperty}, you can specify type manually`);
+        if (typeof targetProperty === 'string') {
+            let targetStorage = identifierOrType;
+            if (!targetStorage) {
+                targetStorage = Reflect.getMetadata('design:type', target, targetProperty);
+                if (typeof targetStorage !== 'function') {
+                    throw new InjectionLollipopError(`Could not detect type for ${target.targetProperty}, you can specify type manually`);
+                }
             }
+            _appendDependenciesMetadata(target, {
+                constructor: typeof targetStorage === 'function'
+                    ? targetStorage
+                    : target,
+                identifier: typeof targetStorage === 'string'
+                    ? targetStorage
+                    : undefined,
+                targetProperty
+            });
         }
-        _appendDependenciesMetadata(target, {
-            constructor: typeof targetStorage === 'function'
-                ? targetStorage
-                : target,
-            identifier: typeof targetStorage === 'string'
-                ? targetStorage
-                : undefined,
-            targetProperty
-        });
         return Object.defineProperty(target, targetProperty, { writable: true });
     };
 

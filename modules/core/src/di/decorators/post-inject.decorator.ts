@@ -25,7 +25,7 @@ function _storeMetadata(target: Object, metadata: PostInjectMetadata): void {
 async function _waitForDependenciesExecution(target: Object, container: DiContainer): Promise<void> {
     await Promise.all(
         findDependencies(target).map(async current => {
-            const instance = container.getComponent(current.identifier || current.constructor);
+            const instance = container.getComponent(current.identifier || <any>current.constructor);
             const metadata: PostInjectMetadata = findPostInjectMetadata(instance);
             if (metadata) {
                 const methodPromise: Promise<any> = metadata.executionPromise

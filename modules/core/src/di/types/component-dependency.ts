@@ -1,4 +1,5 @@
 import { ComponentType } from './component-type';
+import { Constructor } from '../../types/constructor';
 
 /**
  * Represents a <i>ComponentType</i> that is going to be injected in <i>targetProperty</i> of Metadata's target object
@@ -8,6 +9,6 @@ import { ComponentType } from './component-type';
  * @interface ComponentDependency
  * @extends {ComponentType}
  */
-export interface ComponentDependency extends ComponentType {
-    targetProperty;
+export interface ComponentDependency<T extends Constructor<T>  = any> extends ComponentType<T> {
+    targetProperty: keyof T;
 }
