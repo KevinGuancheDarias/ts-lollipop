@@ -12,7 +12,8 @@
   },
   "scripts": {
     "clear-bin": "del-cli bin",
-    "prepack": "npm run clear-bin && tsc && cp src/lollipop bin/",
+    "prepack": "npm run clear-bin && tsc && cp src/lollipop bin/ && cp -rp ../../examples/full skel/",
+    "postpack": "rm -r skel/full",
     "lint": "tslint \"src/**/*.ts\"",
     "dev": "nodemon -e ts  --exec \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
