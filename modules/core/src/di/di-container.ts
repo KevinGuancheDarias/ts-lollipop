@@ -78,7 +78,7 @@ export class DiContainer {
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @template T class of the component to return
-     * @param {() => T} componentType
+     * @param {Constructor<T>} componentType
      * @returns {T}
      * @throws {BadInputLollipopError} When <i>componentType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
