@@ -84,7 +84,7 @@ export class DiContainer {
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof DiContainer
      */
-    public getComponent<T extends Constructor<T>>(componentType: Constructor<T>): T;
+    getComponent<T>(componentType: Constructor<T>): T;
 
     /**
      * Gets a component from the container storage
@@ -97,7 +97,7 @@ export class DiContainer {
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof Container
      */
-    public getComponent<T extends Constructor<T>>(componentNameOrType: string | Constructor<T>): T {
+    public getComponent<T>(componentNameOrType: string | Constructor<T>): T {
         let instance: any;
         if (typeof componentNameOrType === 'string') {
             instance = this._getComponentByString(componentNameOrType);

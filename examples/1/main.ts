@@ -39,5 +39,5 @@ process.on('unhandledRejection', error => {
     console.log('Application ready');
     console.log(
         'Categories in database are',
-        await ContextHolder.getDiModule().getComponent<CategoryComponent>(CategoryComponent).findAll());
+        await ContextHolder.getDiModule().getComponent(CategoryComponent).findAll());
 })();

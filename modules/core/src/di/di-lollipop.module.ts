@@ -64,20 +64,20 @@ export class DiLollipopModule extends AbstractLollipopModule {
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof DiContainer
      */
-    public getComponent<T extends Constructor<T>>(componentType: Constructor<T>): T;
+    public getComponent<T>(componentType: Constructor<T>): T;
 
     /**
      * Gets a component from the container storage
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
      * @template T class of the component to returnGuanche Darias <kevin@kevinguanchedarias.com>
-     * @param {(string | T)} componentNameOrType
+     * @param {(string | Constructor<T>)} componentNameOrType
      * @returns {T}
      * @throws {BadInputLollipopError} When <i>componentNameOrType</i> is not valid
      * @throws {NoSuchComponentLollipopError} When component was not found in the Container
      * @memberof DiLollipopModule
      */
-    public getComponent<T extends Constructor<T>>(componentNameOrType: string | T): T {
+    public getComponent<T>(componentNameOrType: string | Constructor<T>): T {
         return this._diContainer.getComponent<T>(<any>componentNameOrType);
     }
 
