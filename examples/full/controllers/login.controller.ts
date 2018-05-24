@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 import { Controller, LollipopRequest, LollipopResponse, Get, Post, Produces, MediaTypeEnum } from '@ts-lollipop/core/dist/adapters/controller';
 import { SecurityModule, Security } from '@ts-lollipop/core/dist/adapters/controller-security';
 import { JwtControllerSecurityAdapterModule } from '@ts-lollipop/jwt-controller-security-adapter';
@@ -12,6 +13,7 @@ export class LoginController {
     private _jwtSecurity: JwtControllerSecurityAdapterModule;
 
     @Post('login')
+    @Security.excludeMethod()
     public login(request: LollipopRequest, response: LollipopResponse): string {
         const postVars = request.getParsedJson();
         if (postVars.username === LoginController.VALID_USER && postVars.password === LoginController.VALID_PASSWORD) {
