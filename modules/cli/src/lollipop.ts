@@ -7,7 +7,7 @@ function copyFilesAndDirectories(sourceDir: string, targetDir: string): Promise<
 
 const program = new Command();
 
-program.version('0.1.0');
+program.version('0.1.1');
 program.executeSubCommand = () => false;
 program
     .command('new <name>', 'Creates a new Lollipop project')

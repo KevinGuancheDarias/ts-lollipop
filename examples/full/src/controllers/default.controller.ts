@@ -30,7 +30,7 @@ export class DefaultController {
     private _loginComponent: LoginComponent;
 
     @DatabaseConnection()
-    private _connection: Connection;
+    private connection: Connection;
 
     @Get('')
     public sayHello(): string {
@@ -66,7 +66,7 @@ export class DefaultController {
     @Get('databaseData')
     @Produces(MediaTypeEnum.JSON)
     public async databaseData() {
-        return await this._connection.getRepository(Category).find();
+        return await this.connection.getRepository(Category).find();
     }
 
     @Get('notFound')
