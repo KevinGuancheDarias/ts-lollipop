@@ -314,4 +314,6 @@ new ExpressControllerAdapterModule({
 
 # This framework is a new project and for sure misses a lot of features, and has bugs
 
+Version 0.1.x is a concept version, for this reason, it doesn't even has unitary test, usually mandatory in the projects I work for obvious reasons, but never has tested a Node project before, and researching about Mocha and Chai, requires a lot of time, Been fully unit tested is planned for version 0.2.1
+
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md)
