@@ -3,6 +3,10 @@ Lollipop framework
 
 Lollipop is a framework to write fast, clean, and easy to maintain NodeJS applications written in Typescript
 
+# Requirements
+
+* Node >= 8
+
 # Features
 
 * DI using decorators, just define where are the *Components* in the applications, and the DI does the rest. By default **project-root/src/components** , 
