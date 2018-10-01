@@ -1,6 +1,6 @@
 {
   "name": "@ts-lollipop/typeorm-database-adapter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lollipop framework TypeOrm Database Adapter",
   "repository": {
     "type": "git",
