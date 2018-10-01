@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "ts-node src/example/main.ts",
+    "start": "ts-node src/main.ts",
     "tsc": "tsc",
     "prepack": "tsc",
     "lint": "tslint \"src/**/*.ts\"",

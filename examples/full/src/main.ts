@@ -16,7 +16,7 @@ process.on('unhandledRejection', error => {
 });
 
 (async () => {
-    const lollipop = new Lollipop('config.json');
+    const lollipop = new Lollipop('src/config.json');
     await lollipop.registerModules(
         new TypeOrmDatabaseAdapterModule({
             type: 'sqlite',
@@ -27,7 +27,7 @@ process.on('unhandledRejection', error => {
         DiLollipopModule,
         new ExpressControllerAdapterModule({
             directories: [
-                './controllers'
+                './src/controllers'
             ],
             securityAdapters: [
                 new JwtControllerSecurityAdapterModule({ secret: '1234', checkAll: true })
