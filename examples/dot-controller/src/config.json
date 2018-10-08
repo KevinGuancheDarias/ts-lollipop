@@ -1,0 +1,5 @@
+{
+    "basePath": "./src/components",
+    "logLevel": 1,
+    "createDependencyTree": true
+}

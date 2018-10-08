@@ -11,6 +11,7 @@ import { AbstractControllerAdapterModule } from './adapters/controller/abstract-
 import { AbstractDatabaseAdapterModule } from './adapters/database/abstract-database-adapter.module';
 import { NotImplementedLoLlipopError } from './errors/not-implemented-lollipop.error';
 import { BadInputLollipopError } from './errors/bad-input-lollipop.error';
+import { LifeCycleLollipopError } from './errors';
 
 /**
  * Has the code to boostrap the framework
@@ -22,6 +23,8 @@ import { BadInputLollipopError } from './errors/bad-input-lollipop.error';
  */
 export class Lollipop {
 
+    private _isDirty = false;
+    private _dirtyReason: string;
     private _frameworkHooks: { [key: string]: HookStorage } = {};
     private _registeredModules: LollipopModulesContainer = new LollipopModulesContainer();
 
@@ -80,15 +83,22 @@ export class Lollipop {
      */
     public async registerModules(...modules: (LollipopModuleConstructor | AbstractLollipopModule)[]): Promise<void> {
         ContextHolder.checkIsStarted('Cannot register modules, when context is already started');
-        await ConfigurationHolder.loadConfiguration(this._configFile);
-        if (modules) {
-            for (const currentModule of modules) {
-                const instance = currentModule instanceof AbstractLollipopModule
-                    ? currentModule
-                    : new currentModule();
-                await instance.registerModule();
-                this._registeredModules.add(instance);
+        try {
+            await ConfigurationHolder.loadConfiguration(this._configFile);
+            if (modules) {
+                for (const currentModule of modules) {
+                    const instance = currentModule instanceof AbstractLollipopModule
+                        ? currentModule
+                        : new currentModule();
+                    await instance.registerModule();
+                    this._registeredModules.add(instance);
+                }
             }
+        } catch (e) {
+            console.error('Lollipop module registration error', e);
+            this._isDirty = true;
+            this._dirtyReason = `Lollipop module registration error ${e.message}`;
+            throw e;
         }
     }
 
@@ -102,6 +112,7 @@ export class Lollipop {
      * @memberof Lollipop
      */
     public async init(): Promise<void> {
+        this._checkDirty();
         ContextHolder.defineLollipopInstance(this);
         await this._runHookStorage(FrameworkHooksEnum.BEFORE_INIT);
         await this._handleDbInit();
@@ -217,5 +228,13 @@ export class Lollipop {
 
     private async _runHookStorage(hookType: FrameworkHooksEnum): Promise<void> {
         await this._findOrCreateHookStorage(hookType).runAllHooks(this);
+    }
+
+    private _checkDirty(): void {
+        if (this._isDirty) {
+            throw new LifeCycleLollipopError(
+                `Lollipop is dirty, probably because an exception was thrown during the startup, reason: ${this._dirtyReason}`
+            );
+        }
     }
 }

@@ -19,20 +19,38 @@ import { RequestBuilder } from '@ts-lollipop/core/dist/adapters/controller/build
  * @since 0.1.0
  * @extends {AbstractControllerAdapterModule}
  */
-export class ExpressControllerAdapterModule extends AbstractControllerAdapterModule {
+export class ExpressControllerAdapterModule<T extends ControllerAdapterConfiguration = ControllerAdapterConfiguration>
+    extends AbstractControllerAdapterModule<T> {
 
     private _log: LollipopLogger = new LollipopLogger(this.constructor);
-    private _express: express.Application;
+    protected _express: express.Application;
 
-    public constructor(settings: ControllerAdapterConfiguration) {
+    public constructor(settings: T, protected _expressInstance?: express.Application) {
         super(settings);
-        this._express = express();
-        this._express.use(express.urlencoded({ extended: true }));
-        this._express.use(express.json());
+        if (_expressInstance) {
+            this._express = _expressInstance;
+        } else {
+            this._express = express();
+            this._express.use(express.urlencoded({ extended: true }));
+            this._express.use(express.json());
+        }
     }
 
     public getModuleType(): ModuleTypes {
         return ModuleTypes.CONTROLLER;
+    }
+
+
+    /**
+     * Returns the used express instance
+     *
+     * @since 0.2.0
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @returns {express.Application}
+     * @memberof ExpressControllerAdapterModule
+     */
+    public getExpress(): express.Application {
+        return this._express;
     }
 
     public async registerModule(): Promise<void> {
@@ -41,8 +59,10 @@ export class ExpressControllerAdapterModule extends AbstractControllerAdapterMod
             name: this.constructor.name,
             type: FrameworkHooksEnum.CONTEXT_READY,
             body: async () => {
-                await this._log.info(`Invoking express.listen in port ${this._settings.listenPort}`);
-                this._express.listen(this._settings.listenPort);
+                if (!this._expressInstance) {
+                    await this._log.info(`Invoking express.listen in port ${this._settings.listenPort}`);
+                    this._express.listen(this._settings.listenPort);
+                }
             }
         });
     }
@@ -88,15 +108,15 @@ export class ExpressControllerAdapterModule extends AbstractControllerAdapterMod
         });
     }
 
-    private _findGetParams(expressRequest: express.Request): RequestParamsMap {
+    protected _findGetParams(expressRequest: express.Request): RequestParamsMap {
         return expressRequest.query;
     }
 
-    private _findPathParams(expressRequest: express.Request): RequestParamsMap {
+    protected _findPathParams(expressRequest: express.Request): RequestParamsMap {
         return expressRequest.params;
     }
 
-    private _findHttpHeaders(expressRequest: express.Request): RequestParamsMap {
+    protected _findHttpHeaders(expressRequest: express.Request): RequestParamsMap {
         return <any>expressRequest.headers;
     }
 
@@ -104,12 +124,12 @@ export class ExpressControllerAdapterModule extends AbstractControllerAdapterMod
      * Creates a <i>RequestBuilder</i> with GET, PATH params and HTTP headers (commonly used in all HTTP methods)
      *
      * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
-     * @private
+     * @protected
      * @param {express.Request} expressRequest
      * @returns {RequestBuilder}
      * @memberof ExpressControllerAdapterModule
      */
-    private _createCommonRequestBuilder(expressRequest: express.Request): RequestBuilder {
+    protected _createCommonRequestBuilder(expressRequest: express.Request): RequestBuilder {
         return RequestBuilder.build()
             .withControllerAdapter(this)
             .withGetParams(this._findGetParams(expressRequest))
@@ -117,17 +137,33 @@ export class ExpressControllerAdapterModule extends AbstractControllerAdapterMod
             .withHeaders(this._findHttpHeaders(expressRequest));
     }
 
-    private async _runFiltersAndHandleRequestResult(
+    /**
+     * Executes the filters, and sends the results to the browser <br>
+     * Override it, to change the information sent to the browser by defining <i>action</i> argument,
+     * see <i>DotControllerAdapterModule</i> for an example
+     *
+     * @since 0.1.0
+     * @protected
+     * @param target
+     * @param method
+     * @param lollipopRequest
+     * @param lollipopResponse
+     * @param {Function} [action] Action to execute
+     */
+    protected async _runFiltersAndHandleRequestResult(
         target: any,
         method: string,
         lollipopRequest: LollipopRequest,
         lollipopResponse: LollipopResponse,
-        response: express.Response
+        response: express.Response,
+        action?: () => Promise<void>
     ): Promise<void> {
-        this._runFiltersAndFollow(target, method, lollipopRequest, lollipopResponse, async () => {
+        await this._runFiltersAndFollow(target, method, lollipopRequest, lollipopResponse, async () => {
+            if (action) {
+                await action();
+            }
             response.send(lollipopResponse.getBody());
         });
 
     }
-
 }

@@ -16,6 +16,8 @@ import { LollipopRequest } from './pojos/lollipop-request';
 import { LollipopResponse } from './types/lollipop-response';
 import { DiLollipopModule } from '../../di/di-lollipop.module';
 import { DiContainer } from '../../di/di-container';
+import { ViewInformation } from './pojos/view-information';
+import { InvalidViewInformationError } from './errors/invalid-view-information.error';
 
 /**
  * Represents a controller
@@ -27,7 +29,8 @@ import { DiContainer } from '../../di/di-container';
  * @since 0.1.0
  * @extends {AbstractLollipopModule}
  */
-export abstract class AbstractControllerAdapterModule extends AbstractLollipopModule {
+export abstract class AbstractControllerAdapterModule<T extends ControllerAdapterConfiguration = ControllerAdapterConfiguration>
+    extends AbstractLollipopModule {
 
     /**
      * Registered serializers
@@ -51,7 +54,7 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
 
     private _defaultImpLog: LollipopLogger = new LollipopLogger(this.constructor);
 
-    public constructor(protected _settings: ControllerAdapterConfiguration) {
+    public constructor(protected _settings: T) {
         super();
         if (!this._settings.securityAdapters) {
             this._settings.securityAdapters = [];
@@ -371,6 +374,25 @@ export abstract class AbstractControllerAdapterModule extends AbstractLollipopMo
         });
         lollipopRequest.defineAsReadOnly();
         await followAction(result);
+    }
+
+
+    /**
+     * Check that ViewInformation is valid
+     *
+     * @since 0.2.0
+     * @author Kevin Guanche Darias <kevin@kevinguanchedarias.com>
+     * @protected
+     * @param {ViewInformation} input
+     * @throws {InvalidViewInformationError}
+     * @memberof AbstractControllerAdapterModule
+     */
+    protected _checkValidViewInformation(input: ViewInformation): void {
+        if (!(input instanceof ViewInformation)) {
+            throw new InvalidViewInformationError('Controller decorated method, MUST return a ViewInformation instance');
+        } else if (!input.getFilename()) {
+            throw new InvalidViewInformationError('Invalid ViewInformation was passed, no filename was specified');
+        }
     }
 
     private _registerCommonSerializers(): void {

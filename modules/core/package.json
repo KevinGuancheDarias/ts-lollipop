@@ -1,6 +1,6 @@
 {
   "name": "@ts-lollipop/core",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lollipop framework core",
   "repository": {
     "type": "git",
