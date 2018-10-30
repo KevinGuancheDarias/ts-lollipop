@@ -1,6 +1,6 @@
 {
   "name": "@ts-lollipop/jwt-controller-security-adapter",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lollipop framework JWT Controller Security Adapter",
   "repository": {
     "type": "git",

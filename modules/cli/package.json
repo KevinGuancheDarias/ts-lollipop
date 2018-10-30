@@ -1,6 +1,6 @@
 {
   "name": "@ts-lollipop/cli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lollipop framework CLI",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "scripts": {
     "clear-bin": "del-cli bin",
     "prepack": "npm run clear-bin && tsc && cp src/lollipop bin/ && cp -rp ../../examples/* skel/",
-    "postpack": "rm -r skel/full",
+    "postpack": "rm -r skel/*",
     "lint": "tslint \"src/**/*.ts\"",
     "dev": "nodemon -e ts  --exec \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +24,7 @@
     "@types/mz": "0.0.32",
     "@types/ncp": "^2.0.1",
     "@types/recursive-readdir": "^2.2.0",
-    "commander": "^2.15.1",
+    "commander": "^2.19.0",
     "mz": "^2.7.0",
     "ncp": "^2.0.0",
     "recursive-readdir": "^2.2.2"
