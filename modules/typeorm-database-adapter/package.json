@@ -21,7 +21,7 @@
     "typeorm": "^0.2.5"
   },
   "peerDependencies": {
-    "@ts-lollipop/core": "0.1.1"
+    "@ts-lollipop/core": "0.2.0"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",
