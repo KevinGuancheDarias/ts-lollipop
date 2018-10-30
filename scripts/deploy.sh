@@ -17,17 +17,35 @@ else
     npm set registry $verdaccioUrl;
 fi
 
+function safeNpmRun () {
+    ../../scripts/npm-run.sh "$@";
+}
+
+##
+# @param string $1 package to test
+##
+function isVersionPublished () {
+    _parsedModuleName="@ts-lollipop/$1";
+    currentVersion=`safeNpmRun ls | grep "$_parsedModuleName" | cut -d ' ' -f 1 | cut -d '@' -f 3`;
+    node ../../scripts/js/is-version-published.js "$_parsedModuleName" "$currentVersion";
+    return $?;
+}
+
 originalPath="$PWD";
 for module in `find ../modules -maxdepth 1 -type d`; do
     if [ -f "$module/package.json" ]; then
         _moduleName=`basename $module`;
-        echo "Publishing module $_moduleName to verdaccio";
         cd "$module";
-        test -n "$fake" && npm unpublish --force &> /dev/null;
-        npm publish;
-        if [ $? != "0" ]; then
-            echo "Module $_moduleName publish failed =/";
-            exit 1;
+        if ! isVersionPublished "$_moduleName"; then
+            echo "Publishing module $_moduleName to verdaccio";  
+            test -n "$fake" && npm unpublish --force &> /dev/null;
+            npm publish --access public;
+            if [ $? != "0" ]; then
+                echo "Module $_moduleName publish failed =/";
+                exit 1;
+            fi
+        else
+            echo "Package $_moduleName already published";
         fi
         cd "$originalPath";
     fi
